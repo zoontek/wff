@@ -52,10 +52,6 @@
     @return $result;
   }
   @else if $name == gutter-size {
-    @if unitless($gutters) and $gutters < 1 {
-
-    }
-
     $result: $width / $gutters;
 
     @if $fluid { $result: 100% / $result }
