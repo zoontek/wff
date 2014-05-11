@@ -1,0 +1,19 @@
+// wff variables
+// -------------
+// documentation: 
+
+// default internal layout
+// if you want to override it,
+// use default-layout()
+
+$wff: (
+  math:    fluid,
+  width:   1200px,
+  columns: 12,
+  gutters: 30px,
+);
+
+// unique css identifier
+// usefull for using @extend
+
+$wff-id: null;

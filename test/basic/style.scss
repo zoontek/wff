@@ -1,0 +1,26 @@
+@import "../../scss/wff";
+
+$large-desktop: default-layout((columns: 10));
+$small-desktop: layout((columns: 8));
+
+body { margin: 0; }
+
+@include placeholders;
+
+.container {
+  @include container;
+}
+
+.row {
+  @include row;
+}
+
+.column {
+  @include column;
+}
+
+@include breakpoint('(max-width: 768px)', $small-desktop) {
+  .column {
+    @include column;
+  }
+}

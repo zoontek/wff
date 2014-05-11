@@ -1,0 +1,195 @@
+// wff mixins
+// ----------
+// documentation: 
+
+// container
+// $position: center / left / right
+
+@mixin container($position: center) {
+  @if $position == center {
+    @extend %container-center-#{$wff-id};
+  }
+  @else if $position == left {
+    @extend %container-left-#{$wff-id};
+  }
+  @else if $position == right {
+    @extend %container-right-#{$wff-id};
+  }
+}
+
+// row
+
+@mixin row() {
+  @extend %row-#{$wff-id};
+}
+
+// column
+// $size:     unitless
+// $position: first / last / shift n
+
+@mixin column($size: 1, $position: first) {
+  @extend %column-#{$size}-#{$wff-id};
+
+  @if $position == first {
+    @extend %column-first-#{$wff-id};
+  }
+  @else if $position == last {
+    @extend %column-last-#{$wff-id};
+  }
+  @else if nth($position, 1) == shift {
+    @extend %column-first-#{$wff-id};
+    $total: wff-get(column-size) + wff-get(gutter-size);
+    margin-left: $total * nth($position, 2);
+  }
+}
+
+// span
+// $size:     unitless
+// $position: first / last / shift n
+
+@mixin span($size: 1, $position: first) {
+  @extend %span-#{$size}-#{$wff-id};
+
+  @if $position == first {
+    @extend %span-first-#{$wff-id};
+  }
+  @else if $position == last {
+    @extend %span-last-#{$wff-id};
+  }
+  @else if nth($position, 1) == shift {
+    @extend %span-first-#{$wff-id};
+    margin-left: wff-get(span-size) * nth($position, 2);
+  }
+}
+
+// column-gallery
+// $size:  unitless
+// $unset: unitless
+
+@mixin column-gallery($size: 1, $unset: 0) {
+  @extend %column-#{$size}-#{$wff-id};
+  @extend %column-first-#{$wff-id};
+
+  $per-line: ceil(wff-get(columns) / $size);
+
+  @if $unset > 0 {
+    &:nth-of-type(#{$unset}n+#{$unset}) {
+      @extend %column-#{$size}-#{$wff-id};
+    }
+  }
+  &:nth-of-type(#{$per-line}n+#{$per-line}) {
+    @extend %column-last-#{$wff-id};
+  }
+}
+
+// span-gallery
+// $size:  unitless
+// $unset: unitless
+
+@mixin span-gallery($size: 1, $unset: 0) {  
+  @extend %span-#{$size}-#{$wff-id};
+  @extend %span-first-#{$wff-id};
+
+  $per-line: ceil(wff-get(columns) / $size);
+
+  @if $unset > 0 {
+    &:nth-of-type(#{$unset}n+#{$unset}) {
+      @extend %span-#{$size}-#{$wff-id};
+    }
+  }
+  &:nth-of-type(#{$per-line}n+#{$per-line}) {
+    @extend %span-last-#{$wff-id};
+  }
+}
+
+// placeholders
+
+@mixin placeholders() {
+  $width:       wff-get(width);
+  $columns:     wff-get(columns);
+  $gutters:     wff-get(gutters);
+  $fluid:       wff-get(math) == fluid;
+  $static:      wff-get(math) == static;
+  $column-size: wff-get(column-size);
+  $span-size:   wff-get(span-size);
+  $gutter-size: wff-get(gutter-size);
+
+  // container
+  %container-center-#{$wff-id} {
+    @if $fluid { max-width: $width; }
+    @if $static { width: $width; }
+    margin-right: auto;
+    margin-left: auto;
+  }
+  %container-left-#{$wff-id} {
+    @if $fluid { max-width: $width; }
+    @if $static { width: $width; }
+    margin-right: auto;
+    margin-left: 0;
+  }
+  %container-right-#{$wff-id} {
+    @if $fluid { max-width: $width; }
+    @if $static { width: $width; }
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  // row
+  %row-#{$wff-id} {
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+
+  // column
+  @for $size from 1 through $columns {
+    %column-#{$size}-#{$wff-id} {
+      $total: ($column-size + $gutter-size) * $size;
+      width: $total - $gutter-size;
+    }
+  }
+  %column-first-#{$wff-id} {
+    float: left;
+    margin-right: $gutter-size;
+  }
+  %column-last-#{$wff-id} {
+    float: right;
+    margin-right: 0;
+  }
+
+  // span
+  @for $size from 1 through $columns {
+    %span-#{$size}-#{$wff-id} {
+      width: $span-size * $size;
+    }
+  }
+  %span-first-#{$wff-id} {
+    float: left;
+  }
+  %span-last-#{$wff-id} {
+    float: right;
+  }
+}
+
+// breakpoint
+// $query:        string
+// $layout:       map
+// $placeholders: boolean
+
+@mixin breakpoint($query: 'screen', $layout: $wff, $placeholders: true) {
+  @media #{$query} {
+    $old:    $wff;
+    $wff:    $layout     !global;
+    $wff-id: unique-id() !global;
+
+    @if $placeholders {
+      @include placeholders;
+    }
+    @content;
+
+    $wff:    $old !global;
+    $wff-id: null !global;
+  }
+}
