@@ -38,6 +38,7 @@
   }
   @else if nth($position, 1) == shift {
     @extend %column-first-#{$wff-id};
+
     $total: wff-get(column-size) + wff-get(gutter-size);
     margin-left: $total * nth($position, 2);
   }
@@ -58,6 +59,7 @@
   }
   @else if nth($position, 1) == shift {
     @extend %span-first-#{$wff-id};
+    
     margin-left: wff-get(span-size) * nth($position, 2);
   }
 }
