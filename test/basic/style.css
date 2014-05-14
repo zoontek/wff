@@ -11,17 +11,31 @@ body {
   display: block;
   clear: both; }
 
-.column {
-  width: 7.75%; }
+.col {
+  width: 6.04167%; }
 
 .column {
+  width: 40.20833%; }
+
+.column, .col {
   float: left;
   margin-right: 2.5%; }
 
-@media (max-width: 768px) {
-  .column {
-    width: 10.3125%; }
+.osef {
+  width: 57.51295%; }
 
-  .column {
-    float: left;
-    margin-right: 2.5%; } }
+.osef {
+  float: left;
+  margin-right: 6.21762%; }
+
+.column {
+  height: 100px;
+  background: #ccc; }
+
+.osef {
+  height: 100px;
+  background: #aaa; }
+
+.col {
+  height: 100px;
+  background: #ccc; }

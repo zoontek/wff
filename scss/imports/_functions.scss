@@ -2,54 +2,47 @@
 // -------------
 // documentation: none
 
-// map-set() - not included with Sass
-// thanks @oddbird (http://oddbird.net/2013/10/19/map-merge/)
-
-@function map-set($map, $key, $value) {
-  $new: ($key: $value);
-  @return map-merge($map, $new);
-}
-
 // wff-get() - get $wff value
 // short for map-get($wff, $key)
-// can also deliver computed values
 
 @function wff-get($key) {
-  @if map-has-key($wff, $key) {
-    @return map-get($wff, $key); }
+  @return map-get($wff, $key);
+}
 
-  $fluid:   wff-get(math) == fluid;
-  $static:  wff-get(math) == static;
-  $width:   wff-get(width);
-  $columns: wff-get(columns);
-  $gutters: wff-get(gutters);
+// math-get() - get computed value
+// column-size / span-size / gutter-size
 
-  $result:  null;
+@function math-get(
+  $name,
+  $math:    wff-get(math),
+  $width:   wff-get(width),
+  $columns: wff-get(columns),
+  $gutters: wff-get(gutters)
+) {
+  $result: null;
 
-  @if $key == column-size {
-    $gutters-nbr: $gutters * ($columns - 1);
-    $columns-size: $width - $gutters-nbr;
-    $column-size: $columns-size / $columns;
-    $result: $width / $column-size;
+  @if $name == column-size {
+    $result: ($width - $gutters * ($columns - 1)) / $columns;
   }
-  @else if $key == span-size {
-    $span-size: $width / $columns;
-    $result: $width / $span-size;
+  @else if $name == span-size {
+    $result: $width / $columns;
   }
-  @else if $key == gutter-size {
-    $result: $width / $gutters;
+  @else if $name == gutter-size {
+    $result: $gutters;
   }
 
-  @if $result {
-    @if $fluid {
-      $result: 100% / $result;
-    }
-    @if $static {
-      $result: $width / $result;
-    }
+  @if $result and $math == fluid {
+    $result: 100% / ($width / $result);
   }
 
   @return $result;
+}
+
+// map-set() - not included with Sass
+// thanks @Team-Sass (https://github.com/Team-Sass/Sassy-Maps/blob/0.x.x/sass/sassy-maps/_map-set.scss)
+
+@function map-set($map, $key, $value) {
+  @return map-merge($map, ($key: $value));
 }
 
 // layout() - generate a layout from the default one

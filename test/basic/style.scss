@@ -1,6 +1,6 @@
 @import "../../scss/wff";
 
-$large-desktop: default-layout((columns: 10));
+// $large-desktop: default-layout((columns: 10));
 $small-desktop: layout((columns: 8));
 
 body { margin: 0; }
@@ -16,11 +16,37 @@ body { margin: 0; }
 }
 
 .column {
-  @include column;
+  @include column(5);
+  height: 100px;
+  background: #ccc;
 }
 
-@include breakpoint('(max-width: 768px)', $small-desktop) {
-  .column {
-    @include column;
-  }
+.osef {
+  @include column(3 of 5);
+  height: 100px;
+  background: #aaa;
 }
+
+.col {
+  @include column;
+  height: 100px;
+  background: #ccc;
+}
+
+// .shift {
+//   @include column(1);
+//   height: 100px;
+//   background: #bbb;
+// }
+
+// .last {
+//   @include column(1, last);
+//   height: 100px;
+//   background: #aaa;
+// }
+
+// @include breakpoint('(max-width: 768px)', $small-desktop) {
+  // .column {
+  //   @include column;
+  // }
+// }

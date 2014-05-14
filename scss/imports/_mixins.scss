@@ -25,42 +25,45 @@
 
 // column
 // $size:     unitless
-// $position: first / last / shift n
+// $position: none / last / shift n
 
-@mixin column($size: 1, $position: first) {
-  @extend %column-#{$size}-#{$wff-id};
+@mixin column($size: 1, $position: none) {
+  @if (length($size) == 1) {
+    @extend %column-#{$size}-#{$wff-id};
 
-  @if $position == first {
-    @extend %column-first-#{$wff-id};
+    @if $position == none {
+      @extend %column-none-#{$wff-id};
+    }
+    @else if $position == last {
+      @extend %column-last-#{$wff-id};
+    }
+    @else if nth($position, 1) == shift {
+      @extend %column-none-#{$wff-id};
+      @extend %column-shift-#{nth($position, 2)}-#{$wff-id};
+    }
   }
-  @else if $position == last {
-    @extend %column-last-#{$wff-id};
-  }
-  @else if nth($position, 1) == shift {
-    @extend %column-first-#{$wff-id};
-
-    $total: wff-get(column-size) + wff-get(gutter-size);
-    margin-left: $total * nth($position, 2);
+  @else if (length($size) >= 3 and nth($size, 2) == of) {
+    @extend %column-#{nth($size, 1)}-of-#{nth($size, 3)};
+    @extend %column-none-of-#{nth($size, 3)}-#{$wff-id};
   }
 }
 
 // span
 // $size:     unitless
-// $position: first / last / shift n
+// $position: none / last / shift n
 
-@mixin span($size: 1, $position: first) {
+@mixin span($size: 1, $position: none) {
   @extend %span-#{$size}-#{$wff-id};
 
-  @if $position == first {
-    @extend %span-first-#{$wff-id};
+  @if $position == none {
+    @extend %span-none-#{$wff-id};
   }
   @else if $position == last {
     @extend %span-last-#{$wff-id};
   }
   @else if nth($position, 1) == shift {
-    @extend %span-first-#{$wff-id};
-    
-    margin-left: wff-get(span-size) * nth($position, 2);
+    @extend %span-none-#{$wff-id};
+    @extend %span-shift-#{nth($position, 2)}-#{$wff-id};
   }
 }
 
@@ -70,12 +73,12 @@
 
 @mixin column-gallery($size: 1, $unset: 0) {
   @extend %column-#{$size}-#{$wff-id};
-  @extend %column-first-#{$wff-id};
+  @extend %column-none-#{$wff-id};
 
   $per-line: ceil(wff-get(columns) / $size);
 
   @if $unset > 0 {
-    &:nth-of-type(#{$unset}n+#{$unset}) {
+    &:nth-of-type(#{$unset}n) {
       @extend %column-#{$size}-#{$wff-id};
     }
   }
@@ -90,12 +93,12 @@
 
 @mixin span-gallery($size: 1, $unset: 0) {  
   @extend %span-#{$size}-#{$wff-id};
-  @extend %span-first-#{$wff-id};
+  @extend %span-none-#{$wff-id};
 
   $per-line: ceil(wff-get(columns) / $size);
 
   @if $unset > 0 {
-    &:nth-of-type(#{$unset}n+#{$unset}) {
+    &:nth-of-type(#{$unset}n) {
       @extend %span-#{$size}-#{$wff-id};
     }
   }
@@ -107,15 +110,19 @@
 // placeholders
 
 @mixin placeholders() {
+  $math:        wff-get(math);
+  $fluid:       wff-get(math) == fluid;
+  $static:      wff-get(math) == static;
   $width:       wff-get(width);
   $columns:     wff-get(columns);
   $gutters:     wff-get(gutters);
-  $fluid:       wff-get(math) == fluid;
-  $static:      wff-get(math) == static;
-  $column-size: wff-get(column-size);
-  $span-size:   wff-get(span-size);
-  $gutter-size: wff-get(gutter-size);
 
+  $column-size: math-get(column-size);
+  $span-size:   math-get(span-size);
+  $gutter-size: math-get(gutter-size);
+  $cs-static:   math-get(column-size, static);
+  $gs-static:   math-get(gutter-size, static);
+  
   // container
   %container-center-#{$wff-id} {
     @if $fluid { max-width: $width; }
@@ -148,17 +155,38 @@
   // column
   @for $size from 1 through $columns {
     %column-#{$size}-#{$wff-id} {
-      $total: ($column-size + $gutter-size) * $size;
-      width: $total - $gutter-size;
+      width: ($column-size + $gutter-size) * $size - $gutter-size;
     }
   }
-  %column-first-#{$wff-id} {
+  %column-none-#{$wff-id} {
     float: left;
     margin-right: $gutter-size;
+  }
+  @for $container-columns from 2 through ($columns - 1) {
+    $sub-width: ($cs-static + $gs-static) * $container-columns - $gs-static;
+    $cs-nest: math-get(column-size, $math, $sub-width, $container-columns);
+    $gs-nest: math-get(gutter-size, $math, $sub-width, $container-columns);
+
+    @for $size from 1 through ($container-columns - 1) {
+      %column-#{$size}-of-#{$container-columns} {
+        width: ($cs-nest + $gs-nest) * $size - $gs-nest;
+      }
+
+    }
+    %column-none-of-#{$container-columns}-#{$wff-id} {
+      float: left;
+      margin-right: $gs-nest;
+    }
   }
   %column-last-#{$wff-id} {
     float: right;
     margin-right: 0;
+  }
+  @for $shift from 1 through ($columns - 2) {
+    // shifting
+    %column-shift-#{$shift}-#{$wff-id} {
+      margin-left: ($column-size + $gutter-size) * $shift;
+    }
   }
 
   // span
@@ -167,11 +195,16 @@
       width: $span-size * $size;
     }
   }
-  %span-first-#{$wff-id} {
+  %span-none-#{$wff-id} {
     float: left;
   }
   %span-last-#{$wff-id} {
     float: right;
+  }
+  @for $shift from 1 through ($columns - 2) {
+    %span-shift-#{$shift}-#{$wff-id} {
+      margin-left: $span-size * $shift;
+    }
   }
 }
 
