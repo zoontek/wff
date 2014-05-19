@@ -1,8 +1,8 @@
-// wff (waiting for flexbox) - version 1.0
-// ---------------------------------------
-// an extend based semantic grid for sass
-// documentation: 
+// WFF (Waiting For Flexbox)
+// An extend based semantic grid for Sass
+// Version: 1.0.0
+// Documentation: 
 
-@import "imports/variables";
-@import "imports/functions";
-@import "imports/mixins";
+@import "imports/variables",
+        "imports/functions",
+        "imports/mixins";

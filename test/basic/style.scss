@@ -4,31 +4,42 @@
 $small-desktop: layout((columns: 8));
 
 body { margin: 0; }
+// @include debug;
 
 @include placeholders;
 
 .container {
   @include container;
+  @include external;
 }
 
 .row {
   @include row;
 }
 
+
 .column {
-  @include column(5);
-  height: 100px;
+  @include column(10, shift 1);
   background: #ccc;
+  // height: 100px;
 }
 
+
 .osef {
-  @include column(3 of 5);
+  // @include column(2 of 10);
+  @include column-gallery(2 of 10);
   height: 100px;
   background: #aaa;
 }
 
+// .third {
+//   @include column(1 of 2, last);
+//   height: 100px;
+//   background: #000;
+// }
+
 .col {
-  @include column;
+  @include column-gallery;
   height: 100px;
   background: #ccc;
 }

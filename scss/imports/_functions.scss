@@ -1,6 +1,9 @@
-// wff functions
-// -------------
-// documentation: none
+// map-set() - not included with Sass
+// thanks @Team-Sass (https://github.com/Team-Sass/Sassy-Maps/blob/0.x.x/sass/sassy-maps/_map-set.scss)
+
+@function map-set($map, $key, $value) {
+  @return map-merge($map, ($key: $value));
+}
 
 // wff-get() - get $wff value
 // short for map-get($wff, $key)
@@ -10,39 +13,46 @@
 }
 
 // math-get() - get computed value
-// column-size / span-size / gutter-size
+// column-size / span-size
 
-@function math-get(
-  $name,
-  $math:    wff-get(math),
-  $width:   wff-get(width),
-  $columns: wff-get(columns),
-  $gutters: wff-get(gutters)
-) {
-  $result: null;
+@function math-get($name, $size: null) {
+  $width:   wff-get(width);
+  $columns: wff-get(columns);
+  $gutter:  wff-get(gutter);
+  $result:  null;
 
-  @if $name == column-size {
-    $result: ($width - $gutters * ($columns - 1)) / $columns;
+  @if $name == column {
+    $result: ($width - $gutter * ($columns - 1)) / $columns;
+    @if $size {
+      $result: ($result + $gutter) * $size - $gutter;
+    }
   }
-  @else if $name == span-size {
+  @elseif $name == span {
     $result: $width / $columns;
-  }
-  @else if $name == gutter-size {
-    $result: $gutters;
-  }
-
-  @if $result and $math == fluid {
-    $result: 100% / ($width / $result);
+    @if $size {
+      $result: $result * $size;
+    }
   }
 
   @return $result;
 }
 
-// map-set() - not included with Sass
-// thanks @Team-Sass (https://github.com/Team-Sass/Sassy-Maps/blob/0.x.x/sass/sassy-maps/_map-set.scss)
 
-@function map-set($map, $key, $value) {
-  @return map-merge($map, ($key: $value));
+// [value description]
+// @param  {[type]} $value  [description]
+// @param  {[type]} $width: wff-get(width) [description]
+// @return {[type]}         [description]
+
+@function value($value, $width: wff-get(width)) {
+  $fluid:  wff-get(math) == fluid;
+  $static: wff-get(math) == static;
+
+  @if $fluid {
+    @return 100% / ($width / $value);
+  }
+  @else if $static {
+    @return $value;
+  }
 }
 
 // layout() - generate a layout from the default one
@@ -50,6 +60,7 @@
 
 @function layout($map) {
   $new: $wff;
+
   @each $key, $value in $map {
     @if map-has-key($wff, $key) {
       $new: map-set($new, $key, $value);
@@ -66,23 +77,4 @@
   $wff: layout($map) !global;
 
   @return $wff;
-}
-
-// precision() - because sometimes you don't want to use --precision
-// from gist (https://gist.github.com/zoontek/37dcc670f128f41747b7)
-
-@function precision($number, $decimals) {
-  @if $decimals < 1 {
-    @return round($number);
-  }
-  @if $number == round($number) {
-    @return $number;
-  }
-
-  $square: 1;
-  @for $i from 1 through $decimals {
-    $square: $square * 10;
-  }
-
-  @return round($number * $square) / $square;
 }

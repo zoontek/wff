@@ -1,6 +1,18 @@
 body {
   margin: 0; }
 
+body:before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.1;
+  margin: 0 auto;
+  width: 1200px;
+  background: linear-gradient(to right, red 0px, red 72.5px, transparent 72.5px, red 1200px); }
+
 .container {
   max-width: 1200px;
   margin-right: auto;
@@ -11,25 +23,34 @@ body {
   display: block;
   clear: both; }
 
+.osef {
+  width: 17.58794%; }
+
 .col {
   width: 6.04167%; }
 
 .column {
-  width: 40.20833%; }
+  width: 82.91667%; }
+
+.column {
+  margin-left: 8.54167%; }
+
+.osef {
+  float: left;
+  margin-right: 3.01508%; }
 
 .column, .col {
   float: left;
   margin-right: 2.5%; }
 
-.osef {
-  width: 57.51295%; }
+.osef:nth-of-type(5n+5), .col:nth-of-type(12n+12) {
+  float: right;
+  margin-right: 0; }
 
-.osef {
-  float: left;
-  margin-right: 6.21762%; }
+.container {
+  width: 95.2381%; }
 
 .column {
-  height: 100px;
   background: #ccc; }
 
 .osef {
