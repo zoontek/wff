@@ -1,41 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>basic - wff</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div class="column">
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
-        <div class="osef"></div>
+      <div class="first">@include column</div>
+      <div class="shifted">@include column(3, shift 1)</div>
+      <div class="last">@include column(2, last);</div>
       </div>
-    </div>
-        <div class="row">
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
-      <div class="col"></div>
     </div>
   </div>
 </body>

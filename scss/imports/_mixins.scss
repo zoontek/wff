@@ -1,6 +1,4 @@
-// [$position description]
-// @type {[type]}
-
+// $position: center/left/right
 @mixin container($position: center) {
   @if $position == center {
     @extend %container-c-#{$wff-id};
@@ -13,16 +11,12 @@
   }
 }
 
-// [$position description]
-
+// Just do clearfix
 @mixin row() {
   @extend %row-#{$wff-id};
 }
 
-// [$position description]
-// [$size description]
-// @type {Number}
-
+// column (nested or not)
 @mixin column($size: 1, $position: false) {
   $parent: wff-get(columns);
   $nested: length($size) == 3 and wff-get(math) != static;
@@ -42,10 +36,7 @@
   }
 }
 
-// span
-// $size:     unitless
-// $position: none / last / shift n
-
+// span (nested or not)
 @mixin span($size: 1, $position: false) {
   $parent: wff-get(columns);
   $nested: length($size) == 3 and wff-get(math) != static;
@@ -65,10 +56,8 @@
   }
 }
 
-// column-gallery
-// $size:  unitless
-// $unset: unitless
-
+// a gallery of columns
+// $unset is usefull in @media, to…unset previous nth-of-type
 @mixin column-gallery($size: 1, $unset: 0) {
   $parent: wff-get(columns);
   $nested: length($size) == 3 and wff-get(math) != static;
@@ -82,15 +71,13 @@
       @include column($size);
     }
   }
-  &:nth-of-type(#{$per-line}n+#{$per-line}) {
+  &:nth-of-type(#{$per-line}n) {
     @extend %last-#{$wff-id};
   }
 }
 
-// span-gallery
-// $size:  unitless
-// $unset: unitless
-
+// a gallery of spans
+// $unset is usefull in @media, to…unset previous nth-of-type
 @mixin span-gallery($size: 1, $unset: 0) {
   $parent: wff-get(columns);
   $nested: length($size) == 3 and wff-get(math) != static;
@@ -104,13 +91,13 @@
       @include span($size);
     }
   }
-  &:nth-of-type(#{$per-line}n+#{$per-line}) {
+  &:nth-of-type(#{$per-line}n) {
     @extend %last-#{$wff-id};
   }
 }
 
-//external
-
+// apply a width on fluid container
+// make illusion of external gutters
 @mixin external() {
   $width:  wff-get(width);
   $gutter: wff-get(gutter);
@@ -120,16 +107,15 @@
   }
 }
 
-// placeholders
-
+// generate a lot of placeholders
 @mixin placeholders() {
   $fluid:   wff-get(math) == fluid;
   $static:  wff-get(math) == static;
   $width:   wff-get(width);
   $columns: wff-get(columns);
   $gutter:  wff-get(gutter);
-  $column:  math-get(column);
-  $span:    math-get(span);
+  $column:  math(column);
+  $span:    math(span);
 
   $start: null;
   @if $fluid { $start: 2; }
@@ -168,29 +154,29 @@
 
   // columns
   @for $parent from $start through $columns {
-    $p-width: math-get(column, $parent);
+    $p-width: math(column, $parent);
 
     @for $size from 1 through $parent - 1 {
       %column-#{$size}-of-#{$parent}-#{$wff-id} {
-        width: value(math-get(column, $size), $p-width);
+        width: value(math(column, $size), $p-width);
       }
     }
   }
 
   // spans
   @for $parent from $start through $columns {
-    $p-width: math-get(span, $parent);
+    $p-width: math(span, $parent);
 
     @for $size from 1 through $parent - 1 {
       %span-#{$size}-of-#{$parent}-#{$wff-id} {
-        width: value(math-get(span, $size), $p-width);
+        width: value(math(span, $size), $p-width);
       }
     }
   }
 
   // shifted columns
   @for $parent from $start through $columns {
-    $p-width: math-get(column, $parent);
+    $p-width: math(column, $parent);
 
     @for $size from 1 through $parent - 1 {
       %column-s-#{$size}-of-#{$parent}-#{$wff-id} {
@@ -201,7 +187,7 @@
 
   // shifted spans
   @for $parent from $start through $columns {
-    $p-width: math-get(span, $parent);
+    $p-width: math(span, $parent);
 
     @for $size from 1 through $parent - 1 {
       %span-s-#{$size}-of-#{$parent}-#{$wff-id} {
@@ -212,7 +198,7 @@
 
   // columns margins
   @for $parent from $start through $columns {
-    $p-width: math-get(column, $parent);
+    $p-width: math(column, $parent);
 
     %column-m-#{$parent}-#{$wff-id} {
       float: left;
@@ -232,11 +218,8 @@
   }
 }
 
-// breakpoint
-// $query:        string
-// $layout:       map
-// $placeholders: boolean
-
+// mixin for new breakpoint
+// re-generate placeholders using unique id
 @mixin breakpoint($query: 'screen', $layout: $wff, $placeholders: true) {
   @media #{$query} {
     $old:    $wff;
@@ -250,5 +233,63 @@
 
     $wff:    $old !global;
     $wff-id: null !global;
+  }
+}
+
+// display a linear-gradient based debug grid. not very precise
+// $position: center/left/right
+@mixin debug($position: center) {
+  $fluid:   wff-get(math) == fluid;
+  $static:  wff-get(math) == static;
+  $width:   wff-get(width);
+  $columns: wff-get(columns);
+  $gutter:  wff-get(gutter);
+  $column:  math(column);
+  $span:    math(span);
+
+  body:before {
+    content: "";
+    position: fixed;
+    opacity: 0.1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    @if $fluid { max-width: $width; }
+    @elseif $static { width: $width; }
+
+    @if $position == center {
+      margin-right: auto;
+      margin-left: auto;
+    }
+    @elseif $position == left {
+      margin-right: auto;
+      margin-left: 0;
+    }
+    @elseif $position == right {
+      margin-right: 0;
+      margin-left: auto;
+    }
+
+    $gradient: 'red 0';
+
+    @for $size from 1 through $columns {
+      @if $size != 1 {
+        $value: value(($column + $gutter) * ($size - 1));
+        $gradient: $gradient + ', red #{$value}';
+      }
+
+      $value: value(math(column, $size));
+      $gradient: $gradient + ', red #{$value}';
+
+      @if $size != $columns {
+        $gradient: $gradient + ', transparent #{$value}';
+        $value: value(($column + $gutter) * $size);
+        $gradient: $gradient + ', transparent #{$value}';
+      }
+    }
+
+    background: linear-gradient(to right, #{$gradient});
   }
 }

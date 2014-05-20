@@ -1,19 +1,10 @@
 // Default built-in layout
-// @type {map}
-
 $wff: (
   math:    fluid,
-  width:   1200px,
+  width:   80em,
   columns: 12,
-  gutter:  30px,
+  gutter:  2.5em,
 ) !default;
 
 // Unique CSS identifier
-// @type {none}
-
 $wff-id: null;
-
-// If true, display a grid
-// @type {boolean}
-
-$wff-debug: false !default;

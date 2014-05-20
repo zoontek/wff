@@ -1,21 +1,16 @@
 // map-set() - not included with Sass
-// thanks @Team-Sass (https://github.com/Team-Sass/Sassy-Maps/blob/0.x.x/sass/sassy-maps/_map-set.scss)
-
+// Thanks @Team-Sass - https://github.com/Team-Sass/Sassy-Maps/blob/0.x.x/sass/sassy-maps/_map-set.scss
 @function map-set($map, $key, $value) {
   @return map-merge($map, ($key: $value));
 }
 
-// wff-get() - get $wff value
-// short for map-get($wff, $key)
-
+// Short for map-get($wff, $key)
 @function wff-get($key) {
   @return map-get($wff, $key);
 }
 
-// math-get() - get computed value
-// column-size / span-size
-
-@function math-get($name, $size: null) {
+// Compute value (column/span)
+@function math($name, $size: null) {
   $width:   wff-get(width);
   $columns: wff-get(columns);
   $gutter:  wff-get(gutter);
@@ -37,12 +32,7 @@
   @return $result;
 }
 
-
-// [value description]
-// @param  {[type]} $value  [description]
-// @param  {[type]} $width: wff-get(width) [description]
-// @return {[type]}         [description]
-
+// Return usable value (in % if fluid layout)
 @function value($value, $width: wff-get(width)) {
   $fluid:  wff-get(math) == fluid;
   $static: wff-get(math) == static;
@@ -55,9 +45,7 @@
   }
 }
 
-// layout() - generate a layout from the default one
-// merge $map and $wff and return result
-
+// Generate a layout from the default one
 @function layout($map) {
   $new: $wff;
 
@@ -70,9 +58,7 @@
   @return $new;
 }
 
-// default-layout() - override default layout
-// merge $map and $wff in $wff global
-
+// Override default layout
 @function default-layout($map) {
   $wff: layout($map) !global;
 
