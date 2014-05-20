@@ -1,7 +1,7 @@
-WFF (Waiting For Flexbox) is the child of "old-school" grid systems and new semantic ones. It is designed to have the smallest footprint possible.
+## WFF (Waiting For Flexbox)
+The child of "old-school" grid systems and new semantic ones. Designed to have small footprint on large projects.
 
 ## Todo:
-- Write a complete documentation
-- Create examples
-- Add debug background
+- Complete documentation
+- More examples
 
