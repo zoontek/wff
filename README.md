@@ -5,4 +5,5 @@ Designed to have small footprint on large projects.
 ## Todo:
 - Complete documentation
 - More examples
+- Maybe a logo
 
