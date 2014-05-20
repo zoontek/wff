@@ -4,9 +4,6 @@
 // Overriding the default internal layout
 $my-layout: default-layout((columns: 10));
 
-// My variables
-$height: 5em;
-
 // Small "reset"
 // Use normalize.css, srsly
 body {
@@ -32,18 +29,18 @@ body {
 
 .first {
   @include column; // 1 column sized div
-  height: $height;
+  height: 5em;
   background: #bbb;
 }
 
 .shifted {
   @include column(3, shift 1); // 3 columns sized div, pass 1
-  height: $height;
-  background: #bbb;
+  height: 5em;
+  background: #b9b;
 }
 
 .last {
   @include column(2, last); // 2 columns sized div, on right
-  height: $height;
-  background: #bbb;
+  height: 5em;
+  background: #bb9;
 }
