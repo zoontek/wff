@@ -11,11 +11,6 @@
   }
 }
 
-// Just do clearfix
-@mixin row() {
-  @extend %row-#{$wff-id};
-}
-
 // column (nested or not)
 @mixin column($size: 1, $position: false) {
   $parent: wff-get(columns);
@@ -96,6 +91,11 @@
   }
 }
 
+// clearfix
+@mixin clearfix() {
+  @extend %clearfix-#{$wff-id};
+}
+
 // apply a width on fluid container
 // make illusion of external gutters
 @mixin external() {
@@ -117,9 +117,9 @@
   $column:  math(column);
   $span:    math(span);
 
-  $start: null;
-  @if $fluid { $start: 2; }
-  @elseif $static { $start: $columns; }
+  $end: null;
+  @if $fluid { $end: 2; }
+  @elseif $static { $end: $columns; }
   
   // container
   %container-c-#{$wff-id} {
@@ -143,17 +143,8 @@
     margin-left: auto;
   }
 
-  // row
-  %row-#{$wff-id} {
-    &:after {
-      content: "";
-      display: block;
-      clear: both;
-    }
-  }
-
   // columns
-  @for $parent from $start through $columns {
+  @for $parent from $columns through $end {
     $p-width: math(column, $parent);
 
     @for $size from 1 through $parent - 1 {
@@ -164,7 +155,7 @@
   }
 
   // spans
-  @for $parent from $start through $columns {
+  @for $parent from $columns through $end {
     $p-width: math(span, $parent);
 
     @for $size from 1 through $parent - 1 {
@@ -175,7 +166,7 @@
   }
 
   // shifted columns
-  @for $parent from $start through $columns {
+  @for $parent from $columns through $end {
     $p-width: math(column, $parent);
 
     @for $size from 1 through $parent - 1 {
@@ -186,7 +177,7 @@
   }
 
   // shifted spans
-  @for $parent from $start through $columns {
+  @for $parent from $columns through $end {
     $p-width: math(span, $parent);
 
     @for $size from 1 through $parent - 1 {
@@ -197,7 +188,7 @@
   }
 
   // columns margins
-  @for $parent from $start through $columns {
+  @for $parent from $columns through $end {
     $p-width: math(column, $parent);
 
     %column-m-#{$parent}-#{$wff-id} {
@@ -216,6 +207,16 @@
     float: right;
     margin-right: 0;
   }
+
+  // clearfix
+  %clearfix-#{$wff-id} {
+    &:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+
 }
 
 // mixin for new breakpoint
