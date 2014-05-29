@@ -1,17 +1,12 @@
-// First, we import wff, of course
 @import "../../scss/wff";
 
-// Overriding the default internal layout
-$my-layout: default-layout((width: 60em));
+$the-layout: default-layout((width: 60em));
 
-// Small "reset"
-// Use normalize.css, srsly
 body {
   margin: 0;
   font-family: sans-serif;
 }
 
-// Display a linear-gradient based grid
 // @include debug;
 
 // We need to include placeholders once
@@ -19,37 +14,34 @@ body {
 @include placeholders;
 
 .container {
-  @include container; // no parameter: will be centered
+  @include container;
   background: #ddd;
 }
 
-.row {
-  @include row; // apply clearfix
-}
-
 .column {
-  @include column(10, shift 1); // 10 column sized div, shift 1
+  @include column(10, shift 1);
   background: #bbb;
 }
 
 .nest-first {
-  // Because wff is not aware of the DOM, you have to precise the size of the parent
   @include column(7 of 10);
-  // height: 5em;
   background: #b9b;
 }
 
 .nest-last {
-  // Positioning works too (shift / last)
   @include column(2 of 10, last);
   height: 5em;
   background: #bb9;
 }
 
-
-.infinite {
-  // Infinite nesting
+.nest-2-first {
   @include column(4 of 7);
-  height: 5em;
+  height: 2em;
+  background: #9bb;
+}
+
+.nest-2-last {
+  @include column(3 of 7, last);
+  height: 2em;
   background: #9bb;
 }

@@ -7,14 +7,16 @@
 </head>
 <body>
   <div class="container">
-    <div class="row">
+    <div>
       <div class="column">
         <div class="nest-first">
-          <div>@include column(7 of 10)</div>
-          <div class="infinite">@include column(4 of 7, shift 2)</div>
+          @include column(7 of 10)
+          <div>
+            <div class="nest-2-first">@include column(4 of 7, shift 2)</div>
+            <div class="nest-2-last">@include column(2 of 7, last)</div>
+          </div>
         </div>
         <div class="nest-last">@include column(2 of 10, last)</div>
-      </div>
       </div>
     </div>
   </div>

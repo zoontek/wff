@@ -1,9 +1,10 @@
 // Default built-in layout
 $wff: (
-  math:    fluid,
-  width:   80em,
-  columns: 12,
-  gutter:  2.5em,
+  math:     fluid,
+  width:    80em,
+  columns:  12,
+  gutter:   2.5em,
+  external: false
 ) !default;
 
 // Unique CSS identifier

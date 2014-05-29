@@ -1,17 +1,12 @@
-// First, we import wff, of course
 @import "../../scss/wff";
 
-// Overriding the default internal layout
-$my-layout: default-layout((columns: 10));
+$the-layout: default-layout((columns: 10));
 
-// Small "reset"
-// Use normalize.css, srsly
 body {
   margin: 0;
   font-family: sans-serif;
 }
 
-// Display a linear-gradient based grid
 // @include debug;
 
 // We need to include placeholders once
@@ -19,28 +14,24 @@ body {
 @include placeholders;
 
 .container {
-  @include container; // no parameter: will be centered
+  @include container;
   background: #ddd;
 }
 
-.row {
-  @include row; // apply clearfix
-}
-
 .first {
-  @include column; // 1 column sized div
+  @include column;
   height: 5em;
   background: #bbb;
 }
 
 .shifted {
-  @include column(3, shift 1); // 3 columns sized div, shift 1
+  @include column(3, shift 1);
   height: 5em;
   background: #b9b;
 }
 
 .last {
-  @include column(2, last); // 2 columns sized div, on right
+  @include column(2, last);
   height: 5em;
   background: #bb9;
 }

@@ -7,11 +7,6 @@ body {
   margin-right: auto;
   margin-left: auto; }
 
-.row:after {
-  content: "";
-  display: block;
-  clear: both; }
-
 .first {
   width: 7.1875%; }
 
