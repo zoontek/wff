@@ -18,18 +18,12 @@ body {
   @include container;
 }
 
-.column-first {
+.first {
   @include column;
-  margin-bottom: 1em;
-  height: 5em;
-  background: #bbb;
 }
 
-.column-last{
+.second{
   @include column(1, last);
-  margin-bottom: 1em;
-  height: 5em;
-  background: #ddd;
 }
 
 @include breakpoint('screen and (min-width: 48em)', $desktop) {
@@ -39,11 +33,11 @@ body {
     @include external;
   }
 
-  .column-first {
+  .first {
     @include column(8);
   }
 
-  .column-last {
+  .second {
     @include column(4, last);
   }
 }

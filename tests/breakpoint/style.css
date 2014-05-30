@@ -8,39 +8,29 @@ body {
   margin-right: auto;
   margin-left: auto; }
 
-.column-first, .column-last {
+.first, .second {
   width: 46.875%; }
 
-.column-first {
+.first {
   float: left;
   margin-right: 6.25%; }
 
-.column-last {
+.second {
   float: right;
   margin-right: 0; }
 
-.column-first {
-  margin-bottom: 1em;
-  height: 5em;
-  background: #bbb; }
-
-.column-last {
-  margin-bottom: 1em;
-  height: 5em;
-  background: #ddd; }
-
 @media screen and (min-width: 48em) {
-  .column-last {
+  .second {
     width: 31.25%; }
 
-  .column-first {
+  .first {
     width: 65.625%; }
 
-  .column-first {
+  .first {
     float: left;
     margin-right: 3.125%; }
 
-  .column-last {
+  .second {
     float: right;
     margin-right: 0; }
 

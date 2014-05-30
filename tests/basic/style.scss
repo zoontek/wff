@@ -15,23 +15,16 @@ body {
 
 .container {
   @include container;
-  background: #ddd;
 }
 
 .first {
   @include column;
-  height: 5em;
-  background: #bbb;
 }
 
-.shifted {
+.second {
   @include column(3, shift 1);
-  height: 5em;
-  background: #b9b;
 }
 
-.last {
+.third {
   @include column(2, last);
-  height: 5em;
-  background: #bb9;
 }

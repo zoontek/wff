@@ -15,33 +15,24 @@ body {
 
 .container {
   @include container;
-  background: #ddd;
 }
 
 .column {
   @include column(10, shift 1);
-  background: #bbb;
 }
 
 .nest-first {
   @include column(7 of 10);
-  background: #b9b;
 }
 
 .nest-last {
   @include column(2 of 10, last);
-  height: 5em;
-  background: #bb9;
 }
 
 .nest-2-first {
   @include column(4 of 7);
-  height: 2em;
-  background: #9bb;
 }
 
 .nest-2-last {
   @include column(3 of 7, last);
-  height: 2em;
-  background: #9bb;
 }

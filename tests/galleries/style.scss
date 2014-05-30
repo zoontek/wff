@@ -15,14 +15,10 @@ body {
 
 .container {
   @include container;
-  background: #ddd;
 }
 
 .column {
   @include column-gallery(2);
-  margin-bottom: 2em;
-  height: 6em;
-  background: #bbb;
 }
 
 @include breakpoint('screen and (max-width: 64em)') {

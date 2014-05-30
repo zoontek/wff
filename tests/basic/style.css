@@ -10,34 +10,19 @@ body {
 .first {
   width: 7.1875%; }
 
-.last {
+.third {
   width: 17.5%; }
 
-.shifted {
+.second {
   width: 27.8125%; }
 
-.shifted {
+.second {
   margin-left: 10.3125%; }
 
-.first, .shifted {
+.first, .second {
   float: left;
   margin-right: 3.125%; }
 
-.last {
+.third {
   float: right;
   margin-right: 0; }
-
-.container {
-  background: #ddd; }
-
-.first {
-  height: 5em;
-  background: #bbb; }
-
-.shifted {
-  height: 5em;
-  background: #b9b; }
-
-.last {
-  height: 5em;
-  background: #bb9; }

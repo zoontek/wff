@@ -18,14 +18,6 @@ body {
   float: right;
   margin-right: 0; }
 
-.container {
-  background: #ddd; }
-
-.column {
-  margin-bottom: 2em;
-  height: 6em;
-  background: #bbb; }
-
 @media screen and (max-width: 64em) {
   .column, .column:nth-of-type(4n) {
     width: 48.4375%; }

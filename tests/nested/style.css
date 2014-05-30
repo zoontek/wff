@@ -43,21 +43,3 @@ body {
 
 .container {
   background: #ddd; }
-
-.column {
-  background: #bbb; }
-
-.nest-first {
-  background: #b9b; }
-
-.nest-last {
-  height: 5em;
-  background: #bb9; }
-
-.nest-2-first {
-  height: 2em;
-  background: #9bb; }
-
-.nest-2-last {
-  height: 2em;
-  background: #9bb; }
