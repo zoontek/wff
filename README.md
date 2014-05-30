@@ -61,6 +61,30 @@ $larger: layout((columns: 6));
 @include placeholders;
 ```
 
+**breakpoint($query: 'screen', $layout: $wff, $placeholders: true)**
+
+$query: string - your media query
+
+$layout: chosen layout for this breakpoint
+
+$placeholders: if false, placeholders will not be added automatically
+
+```sass
+@import "scss/wff";
+
+// Override the default internal layout
+$my-layout: default-layout((columns: 10));
+$larger: layout((columns: 6));
+
+@include placeholders;
+
+// Here we have 10 columns
+
+@breakpoint('screen and (min-width: 64em)', $larger) {
+    // Here we have 6 columns
+}
+```
+
 **container($position: center)**
 
 $position: left / center / right
@@ -185,4 +209,16 @@ $unset: unitless number
 .row {
     @include clearfix;
 }
+```
+
+**debug()**
+
+Display a linear-gradient based debug grid. not very precise
+
+```sass
+@import "scss/wff";
+
+@include debug;
+
+@include placeholders;
 ```
