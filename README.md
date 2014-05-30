@@ -63,11 +63,9 @@ $larger: layout((columns: 6));
 
 **breakpoint($query: 'screen', $layout: $wff, $placeholders: true)**
 
-$query: string - your media query
-
-$layout: chosen layout for this breakpoint
-
-$placeholders: if false, placeholders will not be added automatically
+- $query: string - your media query
+- $layout: chosen layout for this breakpoint
+- $placeholders: if false, placeholders will not be added automatically
 
 ```sass
 @import "scss/wff";
@@ -87,7 +85,7 @@ $larger: layout((columns: 6));
 
 **container($position: center)**
 
-$position: left / center / right
+- $position: left / center / right
 
 ```sass
 @import "scss/wff";
@@ -101,9 +99,8 @@ $position: left / center / right
 
 **column($size: 1, $position: false)**
 
-$size: unitless number
-
-$position: false / shift number / last
+- $size: unitless number
+- $position: false / shift number / last
 
 ```sass
 @import "scss/wff";
@@ -129,9 +126,8 @@ $position: false / shift number / last
 
 **span($size: 1, $position: false)**
 
-$size: unitless number
-
-$position: false / shift number / last
+- $size: unitless number
+- $position: false / shift number / last
 
 ```sass
 @import "scss/wff";
@@ -157,9 +153,8 @@ $position: false / shift number / last
 
 **column-gallery($size: 1, $unset: 0)**
 
-$size: unitless number
-
-$unset: unitless number
+- $size: unitless number
+- $unset: unitless number
 
 ```sass
 @import "scss/wff";
@@ -177,9 +172,8 @@ $unset: unitless number
 
 **span-gallery($size: 1, $unset: 0)**
 
-$size: unitless number
-
-$unset: unitless number
+- $size: unitless number
+- $unset: unitless number
 
 ```sass
 @import "scss/wff";
