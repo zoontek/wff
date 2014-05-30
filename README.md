@@ -1,11 +1,15 @@
 ## WFF (Waiting For Flexbox)
+
 WFF is an old-fashioned grid system built with Sass, the child of "old-school" css grids and new semantic ones. Based on a massive @extend logic, it has been designed to have a small footprint on relatively large projects.
 
 ## Requirements
+
 - Sass 3.3+
 
 ## Availables functions
+
 **default-layout($map)**
+
 Override the default internal layout.
 You can set a lot of paramater, like:
 - math (fluid or static - convert to %, or conserve the unit)
@@ -25,7 +29,9 @@ $my-layout: default-layout((width: 60em, columns: 10, gutter: 3em));
 ```
 
 **layout($map)**
+
 Create a new layout.
+
 Same paramaters as default-layout($map).
 
 ```sass
@@ -45,7 +51,8 @@ $larger: layout((columns: 6));
 ```
 
 ## Availables mixins
-**placeholders**
+
+**placeholders()**
 
 ```sass
 @import "scss/wff";
@@ -55,6 +62,7 @@ $larger: layout((columns: 6));
 ```
 
 **container($position: center)**
+
 $position: left / center / right
 
 ```sass
@@ -68,7 +76,9 @@ $position: left / center / right
 ```
 
 **column($size: 1, $position: false)**
+
 $size: unitless number
+
 $position: false / shift number / last
 
 ```sass
@@ -94,7 +104,9 @@ $position: false / shift number / last
 ```
 
 **span($size: 1, $position: false)**
+
 $size: unitless number
+
 $position: false / shift number / last
 
 ```sass
@@ -120,7 +132,9 @@ $position: false / shift number / last
 ```
 
 **column-gallery($size: 1, $unset: 0)**
+
 $size: unitless number
+
 $unset: unitless number
 
 ```sass
@@ -138,7 +152,9 @@ $unset: unitless number
 ```
 
 **span-gallery($size: 1, $unset: 0)**
+
 $size: unitless number
+
 $unset: unitless number
 
 ```sass
@@ -155,7 +171,7 @@ $unset: unitless number
 }
 ```
 
-**clearfix**
+**clearfix()**
 
 ```sass
 @import "scss/wff";
