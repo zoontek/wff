@@ -8,7 +8,7 @@ body {
   font-family: sans-serif;
 }
 
-@include debug;
+// @include debug;
 
 // We need to include placeholders once
 // All your grid related CSS will go here
@@ -33,7 +33,7 @@ body {
 }
 
 @include breakpoint('screen and (min-width: 48em)', $desktop) {
-  @include debug;
+  // @include debug;
 
   .container {
     @include external;

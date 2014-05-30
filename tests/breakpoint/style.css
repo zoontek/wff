@@ -2,20 +2,6 @@ body {
   margin: 0;
   font-family: sans-serif; }
 
-body:before {
-  content: "";
-  position: fixed;
-  opacity: 0.1;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  max-width: 80em;
-  width: 88.88889%;
-  margin-right: auto;
-  margin-left: auto;
-  background: linear-gradient(to right, red 0, red 46.875%, transparent 46.875%, transparent 53.125%, red 53.125%, red 100%); }
-
 .container {
   max-width: 80em;
   width: 88.88889%;
@@ -57,20 +43,6 @@ body:before {
   .column-last {
     float: right;
     margin-right: 0; }
-
-  body:before {
-    content: "";
-    position: fixed;
-    opacity: 0.1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    max-width: 80em;
-    width: 94.11765%;
-    margin-right: auto;
-    margin-left: auto;
-    background: linear-gradient(to right, red 0, red 5.46875%, transparent 5.46875%, transparent 8.59375%, red 8.59375%, red 14.0625%, transparent 14.0625%, transparent 17.1875%, red 17.1875%, red 22.65625%, transparent 22.65625%, transparent 25.78125%, red 25.78125%, red 31.25%, transparent 31.25%, transparent 34.375%, red 34.375%, red 39.84375%, transparent 39.84375%, transparent 42.96875%, red 42.96875%, red 48.4375%, transparent 48.4375%, transparent 51.5625%, red 51.5625%, red 57.03125%, transparent 57.03125%, transparent 60.15625%, red 60.15625%, red 65.625%, transparent 65.625%, transparent 68.75%, red 68.75%, red 74.21875%, transparent 74.21875%, transparent 77.34375%, red 77.34375%, red 82.8125%, transparent 82.8125%, transparent 85.9375%, red 85.9375%, red 91.40625%, transparent 91.40625%, transparent 94.53125%, red 94.53125%, red 100%); }
 
   .container {
     width: 94.11765%; } }
