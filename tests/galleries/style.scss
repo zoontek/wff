@@ -1,0 +1,33 @@
+@import "../../scss/wff";
+
+$the-layout: default-layout((columns: 8));
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+
+// @include debug;
+
+// We need to include placeholders once
+// All your grid related CSS will go here
+@include placeholders;
+
+.container {
+  @include container;
+  background: #ddd;
+}
+
+.column {
+  @include column-gallery(2);
+  margin-bottom: 2em;
+  height: 6em;
+  background: #bbb;
+}
+
+@include breakpoint('screen and (max-width: 64em)') {
+  .column {
+    // We unset a 2 columns sized element in a 8 columns grid
+    @include column-gallery(4, 8/2);
+  }
+}

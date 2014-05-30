@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  font-family: sans-serif; }
+
+.container {
+  max-width: 80em;
+  margin-right: auto;
+  margin-left: auto; }
+
+.column {
+  width: 22.65625%; }
+
+.column {
+  float: left;
+  margin-right: 3.125%; }
+
+.column:nth-of-type(4n) {
+  float: right;
+  margin-right: 0; }
+
+.container {
+  background: #ddd; }
+
+.column {
+  margin-bottom: 2em;
+  height: 6em;
+  background: #bbb; }
+
+@media screen and (max-width: 64em) {
+  .column, .column:nth-of-type(4n) {
+    width: 48.4375%; }
+
+  .column, .column:nth-of-type(4n) {
+    float: left;
+    margin-right: 3.125%; }
+
+  .column:nth-of-type(2n) {
+    float: right;
+    margin-right: 0; } }
