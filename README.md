@@ -85,4 +85,4 @@ But because wff use massively Sass @extend directive, it is able to produce this
 }
 ```
 
-Slightly better, no? Check out the wiki to find more.
+Slightly better, no? Check out [the wiki](https://github.com/Onemore/wff/wiki) to find more.
