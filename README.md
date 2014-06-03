@@ -49,7 +49,7 @@ Currently, if you choose a "semantic" grid system and have watched the generated
 
 ***
 
-But because WFF use massively Sass @extend, it is able to produce this:
+But because WFF use massively Sass @extend directive, it is able to produce this:
 
 ```sass
 // Example using wff grid system
