@@ -26,6 +26,8 @@ Currently, if you choose a "semantic" grid system and have watched the generated
 }
 ```
 ```css
+/* Generated CSS */
+
 .first {
   float: left;
   width: 7.1875%;
@@ -67,6 +69,8 @@ But because WFF use massively Sass @extend, it is able to produce this:
 }
 ```
 ```css
+/* Generated CSS */
+
 .first, .second {
   width: 7.1875%;
 }
