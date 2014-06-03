@@ -8,7 +8,7 @@ WFF is an old-fashioned grid system built with Sass, the child of "old-school" c
 
 ## Another one? What's make this one different?
 
-Currently, if you choose a "semantic" grid system and have watched the generated CSS a little, you maybe noticed that your framework generally doesn't respect the "DRY" philosophy.
+Currently, if you choose a "semantic" grid system and have watched the generated CSS a little, you maybe noticed that your framework generally doesn't respect the "DRY" philosophy, generate huge code repetition.
 
 ```sass
 // Example using a classic semantic grid system
