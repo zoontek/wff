@@ -81,4 +81,4 @@ But because WFF use massively Sass @extend, it is able to produce this:
 }
 ```
 
-Better, no? Check out [https://github.com/Onemore/wff/wiki](documentation) to find more.
+Slightly better, no? Check out [https://github.com/Onemore/wff/wiki](documentation) to find more.
